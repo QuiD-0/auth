@@ -153,4 +153,4 @@ replay_pid*
 
 .gradle/*
 
-./infra/db/
+infra/db/
