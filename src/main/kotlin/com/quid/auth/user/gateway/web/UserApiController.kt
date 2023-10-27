@@ -18,5 +18,8 @@ class UserApiController(
 
     @PostMapping("/signup")
     fun signupRequest(@RequestBody request: SignUpRequest): ApiResponse<UserResponse> =
-        Success{ UserResponse(signUp(request.toUser())) }
+        request.toUser()
+            .run { signUp(this) }
+            .let { UserResponse(it) }
+            .let { Success(it) }
 }
