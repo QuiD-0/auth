@@ -1,4 +1,4 @@
-package com.quid.auth.global
+package com.quid.auth.global.api
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter.ofPattern
@@ -10,13 +10,13 @@ sealed interface ApiResponse<RESPONSE> {
 }
 
 data class Success<RESPONSE>(
-    val data: () -> RESPONSE
+    val data: RESPONSE
 ) : ApiResponse<RESPONSE> {
     override val result: String = "SUCCESS"
 }
 
 data class Error<ERROR>(
     val message: String,
-) : ApiResponse<ERROR>{
+) : ApiResponse<ERROR> {
     override val result: String = "ERROR"
 }

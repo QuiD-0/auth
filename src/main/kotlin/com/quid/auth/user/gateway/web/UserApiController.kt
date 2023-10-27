@@ -1,7 +1,7 @@
 package com.quid.auth.user.gateway.web
 
-import com.quid.auth.global.ApiResponse
-import com.quid.auth.global.Success
+import com.quid.auth.global.api.ApiResponse
+import com.quid.auth.global.api.Success
 import com.quid.auth.user.gateway.web.request.SignUpRequest
 import com.quid.auth.user.usecase.SignUp
 import org.springframework.web.bind.annotation.PostMapping
@@ -17,6 +17,6 @@ class UserApiController(
 
     @PostMapping("/signup")
     fun signupRequest(@RequestBody request: SignUpRequest): ApiResponse<Unit> =
-        Success { signUp(request.toUserInfo()) }
+        Success(signUp(request.toUserInfo()))
 
 }

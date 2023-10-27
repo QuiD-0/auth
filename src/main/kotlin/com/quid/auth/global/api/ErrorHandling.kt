@@ -1,4 +1,4 @@
-package com.quid.auth.global
+package com.quid.auth.global.api
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.*
