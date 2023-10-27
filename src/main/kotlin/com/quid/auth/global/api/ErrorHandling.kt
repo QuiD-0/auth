@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class ErrorHandling {
 
     @ExceptionHandler(Exception::class)
-    fun handleException(ex: Exception): ResponseEntity<Error<String>> =
-        ResponseEntity<Error<String>>(
-            Error(ex.message ?: "Unknown Error"),
+    fun handleException(ex: Exception): ResponseEntity<Error> =
+        ResponseEntity<Error>(
+            Error{ ex.message ?: "Unknown Error" },
             determineStatusCode(ex)
         ).also { ex.printStackTrace() }
 

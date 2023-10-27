@@ -15,8 +15,11 @@ data class Success<RESPONSE>(
     override val result: String = "SUCCESS"
 }
 
-data class Error<ERROR>(
+data class Error(
     val message: String,
-) : ApiResponse<ERROR> {
+) : ApiResponse<String> {
     override val result: String = "ERROR"
 }
+
+fun <RESPONSE> Success(data: () -> RESPONSE): Success<RESPONSE> = Success(data())
+fun Error(message: () -> String): Error = Error(message())

@@ -1,6 +1,6 @@
 package com.quid.auth.user.gateway.web.request
 
-import com.quid.auth.user.domain.UserInfo
+import com.quid.auth.user.domain.User
 
 data class SignUpRequest(
     val username: String,
@@ -9,7 +9,7 @@ data class SignUpRequest(
     val name: String,
 ) {
 
-    fun toUserInfo() = UserInfo(
+    fun toUser() = User(
         username = username,
         password = password,
         email = email,
