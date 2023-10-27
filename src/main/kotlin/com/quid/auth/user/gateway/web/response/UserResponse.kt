@@ -7,8 +7,8 @@ data class UserResponse(
     val username: String,
 )
 
-fun UserResponse(user: User): UserResponse =
+fun UserResponse(user: () -> User): UserResponse =
     UserResponse(
-        userSeq = user.userSeq!!,
-        username = user.username,
+        user().userSeq!!,
+        user().username,
     )

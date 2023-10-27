@@ -10,7 +10,7 @@ import java.lang.IllegalArgumentException
 interface UserRepository {
 
     fun save(user: User): User
-    fun findByUsername(username: String): User?
+    fun findByUsername(username: String): User
     fun existsByUsername(username: String): Boolean
 
     @Repository
@@ -19,10 +19,10 @@ interface UserRepository {
     ) : UserRepository {
 
         @Transactional
-        override fun save(user: User) = userJpaRepository.save(UserEntity(user)).toUser()
+        override fun save(user: User): User = userJpaRepository.save(UserEntity(user)).toUser()
 
         @Transactional(readOnly = true)
-        override fun findByUsername(username: String) =
+        override fun findByUsername(username: String): User =
             userJpaRepository.findByUsername(username)
                 ?.toUser()
                 ?: throw IllegalArgumentException("User not found: $username")
