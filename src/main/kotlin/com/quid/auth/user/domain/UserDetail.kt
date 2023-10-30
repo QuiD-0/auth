@@ -21,7 +21,7 @@ data class UserDetail (
     }
 
     override fun isAccountNonExpired(): Boolean {
-        return user.deleted
+        return true;
     }
 
     override fun isAccountNonLocked(): Boolean {
