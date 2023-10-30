@@ -33,9 +33,8 @@ class SecurityConfig {
     fun byCryptPasswordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     private fun allow(): Array<RequestMatcher> = arrayOf(
-        AntPathRequestMatcher("/api/user/signup", "POST"),
-        AntPathRequestMatcher("/signup", "GET"),
         AntPathRequestMatcher("/", "GET"),
+        AntPathRequestMatcher("/api/user/signup", "POST"),
     )
 
 }
