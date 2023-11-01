@@ -19,7 +19,6 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain =
         http.authorizeRequests()
             .requestMatchers(*allow()).permitAll()
-            .requestMatchers(*admin()).hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .csrf().disable()
@@ -28,10 +27,6 @@ class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .build()
-
-    private fun admin(): Array<RequestMatcher> = arrayOf(
-        AntPathRequestMatcher("/api/admin/**", "GET"),
-    )
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
