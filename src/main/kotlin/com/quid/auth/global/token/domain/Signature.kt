@@ -1,6 +1,6 @@
 package com.quid.auth.global.token.domain
 
-data class TokenSignature(
+data class Signature(
     val secret: String
 ) {
     init {

@@ -8,10 +8,10 @@ import java.nio.charset.StandardCharsets.UTF_8
 import java.time.ZoneOffset
 import java.util.*
 
-data class AccessToken(
-    val header: TokenHeader = TokenHeader(),
-    val payload: TokenPayload,
-    val signature: TokenSignature,
+data class Token(
+    val header: Header = Header(),
+    val payload: Payload,
+    val signature: Signature,
 ) {
 
     fun encode(): String = Jwts.builder().apply {
@@ -21,11 +21,12 @@ data class AccessToken(
             setExpiration(Date(payload.exp.toEpochSecond(ZoneOffset.UTC) * 1000))
             setIssuedAt(Date(payload.iat.toEpochSecond(ZoneOffset.UTC) * 1000))
             setId(payload.jti)
+            claim("username", payload.username)
         }.signWith(Keys.hmacShaKeyFor(signature.secret.toByteArray(UTF_8)), HS256).compact()
 }
 
-fun decodeToken(value: String, secret: String): AccessToken =
+fun decodeToken(value: String, secret: String): Token =
     Jwts.parserBuilder().setSigningKey(secret.toByteArray(UTF_8)).build().parse(value)
         .let { it.body as Claims }
         .let { makePayload(it) }
-        .let { AccessToken(payload = it, signature = TokenSignature(secret)) }
+        .let { Token(payload = it, signature = Signature(secret)) }

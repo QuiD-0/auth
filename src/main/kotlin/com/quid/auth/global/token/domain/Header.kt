@@ -1,6 +1,6 @@
 package com.quid.auth.global.token.domain
 
-data class TokenHeader(
+data class Header(
     val typ: String = "JWT",
     val alg: String = "HS256"
 ) {
