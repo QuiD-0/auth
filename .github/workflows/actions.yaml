@@ -14,11 +14,8 @@ jobs:
           distribution: 'corretto'
           java-version: '17'
 
-      - name: List files in the repository
-        run: ls ${{ github.workspace }}
-
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
-          arguments: clean check --stacktrace
+          arguments: clean check test
 
