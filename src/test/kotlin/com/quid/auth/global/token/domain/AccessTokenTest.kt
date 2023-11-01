@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
 import java.time.LocalDateTime
 
 class AccessTokenTest{
@@ -26,7 +27,7 @@ class AccessTokenTest{
     @Test
     @DisplayName("토큰 시크릿은 32바이트 이상이어야 한다.")
     fun tokenSecretError(){
-        assertThrows<WeakKeyException> {
+        assertThrows<IllegalArgumentException> {
             AccessToken(
                 payload = TokenPayload(
                     sub = "test",
