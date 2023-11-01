@@ -13,6 +13,7 @@ data class Token(
     val payload: Payload,
     val signature: Signature,
 ) {
+    constructor(payload: Payload, signature: Signature) : this(Header(), payload, signature)
 
     fun encode(): String = Jwts.builder().apply {
             setHeader(header.value)
@@ -28,5 +29,5 @@ data class Token(
 fun decodeToken(value: String, secret: String): Token =
     Jwts.parserBuilder().setSigningKey(secret.toByteArray(UTF_8)).build().parse(value)
         .let { it.body as Claims }
-        .let { makePayload(it) }
+        .let { Payload(it) }
         .let { Token(payload = it, signature = Signature(secret)) }

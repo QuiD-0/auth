@@ -14,12 +14,12 @@ class TokenTest{
     fun makeToken(){
         assertDoesNotThrow {
             Token(
-                payload = Payload(
+                Payload(
                     sub = "accessToken",
                     exp = LocalDateTime.now().plusHours(1),
                     username = "user"
                 ),
-                signature = Signature("testSecretLengthIsMoreThan32Bytes")
+                Signature("testSecretLengthIsMoreThan32Bytes")
             ).encode()
         }
     }
@@ -29,12 +29,12 @@ class TokenTest{
     fun tokenSecretError(){
         assertThrows<IllegalArgumentException> {
             Token(
-                payload = Payload(
+                Payload(
                     sub = "accessToken",
                     exp = LocalDateTime.now().plusDays(1),
                     username = "user"
                 ),
-                signature = Signature("testSecret")
+                Signature("testSecret")
             ).encode()
         }
     }

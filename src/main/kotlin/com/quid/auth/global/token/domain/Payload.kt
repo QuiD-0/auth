@@ -13,14 +13,7 @@ data class Payload(
     val exp: LocalDateTime,
     val username: String,
 ) {
-    init {
-        require(exp.isAfter(iat)) { "토큰 만료시간은 발급시간보다 빠를수 없습니다." }
-        require(exp.isAfter(LocalDateTime.now())) { "만료된 토큰입니다." }
-    }
-}
-
-fun makePayload(claims: Claims): Payload {
-    return Payload(
+    constructor(claims: Claims) : this(
         jti = claims.id,
         iss = claims.issuer,
         sub = claims.subject,
@@ -28,4 +21,9 @@ fun makePayload(claims: Claims): Payload {
         exp = claims.expiration.toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime(),
         username = claims["username"] as String
     )
+
+    init {
+        require(exp.isAfter(iat)) { "토큰 만료시간은 발급시간보다 빠를수 없습니다." }
+        require(exp.isAfter(LocalDateTime.now())) { "만료된 토큰입니다." }
+    }
 }
