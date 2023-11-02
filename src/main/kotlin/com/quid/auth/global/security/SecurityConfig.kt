@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.security.web.util.matcher.RequestMatcher
+import org.springframework.util.AntPathMatcher
 
 
 @Configuration
@@ -26,35 +27,25 @@ class SecurityConfig(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain =
-        http.httpBasic { it.disable() }.authorizeHttpRequests()
-            .requestMatchers(*allow()).permitAll()
-            .anyRequest().authenticated()
-            .and()
+        http.httpBasic { it.disable() }
+            .csrf { it.disable() }
+            .formLogin { it.disable() }
+            .authorizeHttpRequests{
+                it.requestMatchers(*allow()).permitAll()
+                it.anyRequest().authenticated()
+            }
             .addFilterBefore(
                 JwtAuthenticationFilter(
                     jwtTokenDecoder,
                     userAuthService
                 ),
                 UsernamePasswordAuthenticationFilter::class.java
-            ).csrf { it.disable() }
-            .formLogin { it.disable() }
+            )
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .build()
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
-
-    @Bean
-    fun webSecurityCustomizer(): WebSecurityCustomizer =
-        WebSecurityCustomizer {
-            it.ignoring().requestMatchers(*allow(), *resources())
-        }
-
-    private fun resources(): Array<RequestMatcher> = arrayOf(
-        AntPathRequestMatcher("/static/**"),
-        AntPathRequestMatcher("/public/**"),
-        AntPathRequestMatcher("/resources/**"),
-    )
 
     private fun allow(): Array<RequestMatcher> = arrayOf(
         AntPathRequestMatcher("/", "GET"),
