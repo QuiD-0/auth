@@ -16,5 +16,14 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
 jwt:
   secret: this_is_token_secret_code_please_replace_this_in_production
