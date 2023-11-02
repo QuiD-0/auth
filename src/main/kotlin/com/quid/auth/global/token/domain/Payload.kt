@@ -8,7 +8,7 @@ import java.util.*
 data class Payload(
     val jti: String = UUID.randomUUID().toString(),
     val iss: String = "QUID_LAB",
-    val sub: String,
+    val sub: TokenType,
     val iat: LocalDateTime = LocalDateTime.now(),
     val exp: LocalDateTime,
     val username: String,
@@ -16,7 +16,7 @@ data class Payload(
     constructor(claims: Claims) : this(
         jti = claims.id,
         iss = claims.issuer,
-        sub = claims.subject,
+        sub = TokenType.of(claims.subject),
         iat = claims.issuedAt.toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime(),
         exp = claims.expiration.toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime(),
         username = claims["username"] as String

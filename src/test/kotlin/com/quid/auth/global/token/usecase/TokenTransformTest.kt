@@ -2,6 +2,8 @@ package com.quid.auth.global.token.usecase
 
 import com.quid.auth.global.token.domain.Payload
 import com.quid.auth.global.token.domain.Token
+import com.quid.auth.global.token.domain.TokenType
+import com.quid.auth.global.token.domain.TokenType.ACCESS
 import com.quid.auth.global.token.usecase.TokenDecoder.*
 import com.quid.auth.global.token.usecase.TokenEncoder.JwtTokenEncoder
 import io.jsonwebtoken.security.SignatureException
@@ -17,7 +19,7 @@ class TokenTransformTest {
 
     private val token = Token(
         Payload(
-            sub = "accessToken",
+            sub = ACCESS,
             exp = LocalDateTime.now().plusHours(1),
             username = "user"
         )

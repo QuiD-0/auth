@@ -1,5 +1,6 @@
 package com.quid.auth.global.token.domain
 
+import com.quid.auth.global.token.domain.TokenType.ACCESS
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -14,7 +15,7 @@ class TokenTest{
         assertDoesNotThrow {
             Token(
                 Payload(
-                    sub = "accessToken",
+                    sub = ACCESS,
                     exp = LocalDateTime.now().plusHours(1),
                     username = "user"
                 )
@@ -28,7 +29,7 @@ class TokenTest{
         assertThrows<IllegalArgumentException> {
             Token(
                 Payload(
-                    sub = "accessToken",
+                    sub = ACCESS,
                     exp = LocalDateTime.now().plusDays(1),
                     username = "user"
                 )

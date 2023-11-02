@@ -24,7 +24,7 @@ fun interface TokenEncoder {
 
         override fun invoke(token: Token): String = Jwts.builder().apply {
             setHeader(token.header.value)
-            setSubject(token.payload.sub)
+            setSubject(token.payload.sub.name)
             setIssuer(token.payload.iss)
             setExpiration(Date(token.payload.exp.toEpochSecond(ZoneOffset.UTC) * 1000))
             setIssuedAt(Date(token.payload.iat.toEpochSecond(ZoneOffset.UTC) * 1000))
