@@ -30,4 +30,4 @@ fun decodeToken(value: String, secret: String): Token =
     Jwts.parserBuilder().setSigningKey(secret.toByteArray(UTF_8)).build().parse(value)
         .let { it.body as Claims }
         .let { Payload(it) }
-        .let { Token(payload = it, signature = Signature(secret)) }
+        .let { Token(it, Signature(secret)) }
