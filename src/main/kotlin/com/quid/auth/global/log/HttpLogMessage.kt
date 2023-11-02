@@ -20,10 +20,8 @@ data class HttpLogMessage(
             |HTTP METHOD : $httpMethod
             |REQUEST URI : $requestUri
             |HTTP STATUS : $httpStatus
-            |CLIENT IP : $clientIp
             |ELAPSED TIME : $elapsedTime
             |REQUEST BODY : $requestBody
-            |RESPONSE BODY : $responseBody
         """.trimMargin()
     }
 }
