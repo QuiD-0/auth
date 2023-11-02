@@ -8,6 +8,9 @@ data class UserDetail (
     val user: User,
     val authority: UserAuthority
 ): UserDetails{
+    val name: String
+        get() = user.name
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf()
     }

@@ -11,8 +11,8 @@ fun interface SignUp {
 
     @Service
     class SignUpUseCase(
-        val userRepository: UserRepository,
-        val passwordEncoder: PasswordEncoder
+        private val userRepository: UserRepository,
+        private val passwordEncoder: PasswordEncoder
     ) : SignUp {
 
         override fun invoke(user: User): UserResponse =
