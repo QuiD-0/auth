@@ -1,5 +1,6 @@
 package com.quid.auth.global.token.usecase
 
+import com.quid.auth.global.token.domain.AccessToken
 import com.quid.auth.global.token.domain.Payload
 import com.quid.auth.global.token.domain.Token
 import io.jsonwebtoken.Claims
@@ -23,6 +24,6 @@ interface TokenDecoder {
                 .parse(token)
                 .let { it.body as Claims }
                 .let { Payload(it) }
-                .let { Token(it) }
+                .let { AccessToken(payload = it) }
     }
 }

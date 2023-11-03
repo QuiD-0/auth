@@ -17,8 +17,8 @@ class TokenTransformTest {
     private lateinit var tokenDecoder: TokenDecoder
 
     private val token = AccessToken(
-        exp = LocalDateTime.now().plusHours(1),
-        username = "user"
+        exp = LocalDateTime.now().plusYears(999),
+        username = "test"
     )
 
     @Test
@@ -37,11 +37,10 @@ class TokenTransformTest {
 
         assertDoesNotThrow {
             tokenDecoder(
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9." +
-                        "eyJzdWIiOiJhY2Nlc3NUb2tlbiIsImlzcyI6IlFVSURfTEFCIiwiZXhw" +
-                        "IjozMzIyNDI5MzMyOCwiaWF0IjoxNjk4OTIwNTI4LCJqdGkiOiJmZjdk" +
-                        "OTRmNC1hYjI2LTQzMzctYmRmYy1hZTljYjAzOTBkNjAiLCJ1c2VybmFt" +
-                        "ZSI6InVzZXIifQ.PWGo895OTBn7BD-FJGao30xQSEvsMuOFp437_fo_I4w"
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpc3MiOiJR" +
+                        "VUlEX0xBQiIsImV4cCI6MzMyMjQzODY4NzMsImlhdCI6MTY5OTAxNDA3MywianRpIjo" +
+                        "iZmViY2FjNmQtYmQ4OC00MmJkLThkM2QtN2RmM2RkY2Y4ZjY1IiwidXNlcm5hbWUiOi" +
+                        "J0ZXN0In0.qTLvwxmlShfqkWw-g6UeMz4cW8nEftuac7nLTk3dWhE"
             )
         }
     }
