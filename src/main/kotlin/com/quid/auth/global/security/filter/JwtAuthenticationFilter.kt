@@ -22,7 +22,7 @@ class JwtAuthenticationFilter(
             val accessToken = getToken(request)
                 .run { tokenDecoder(this) }
 
-            val user = userAuthService.loadUserByUsername(accessToken.payload.username)
+            val user = userAuthService.loadUserByUsername(accessToken.username)
 
             UsernamePasswordAuthenticationToken(user, null, user.authorities)
                 .also { SecurityContextHolder.getContext().authentication = it }

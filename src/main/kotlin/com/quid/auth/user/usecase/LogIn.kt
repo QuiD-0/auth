@@ -10,7 +10,6 @@ import com.quid.auth.user.gateway.web.response.TokenResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 fun interface LogIn {
     operator fun invoke(username: String, password: String): TokenResponse
@@ -27,14 +26,11 @@ fun interface LogIn {
                 .let { authenticationManagerBuilder.getObject().authenticate(it) }
                 .let { it.principal as UserDetail }
                 .let {
-                    AccessToken(
-                        it.username,
-                        LocalDateTime.now().plusMinutes(30)
-                    )
+                    AccessToken(it.username)
                 }
                 .let { tokenEncoder(it) }
 
-            val refreshToken = RefreshToken(LocalDateTime.now().plusDays(30))
+            val refreshToken = RefreshToken()
                 .also { refreshTokenRepository.save(UserToken(username, it.payload.jti)) }
                 .run { tokenEncoder(this) }
 

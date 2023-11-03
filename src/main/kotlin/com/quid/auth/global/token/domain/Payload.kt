@@ -24,6 +24,5 @@ data class Payload(
 
     init {
         require(exp.isAfter(iat)) { "토큰 만료시간은 발급시간보다 빠를수 없습니다." }
-        require(exp.isAfter(LocalDateTime.now())) { "만료된 토큰입니다." }
     }
 }
