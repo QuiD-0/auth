@@ -1,7 +1,6 @@
 package com.quid.auth.user.usecase
 
-import com.quid.auth.global.token.domain.Token
-import com.quid.auth.global.token.domain.TokenType
+import com.quid.auth.global.token.domain.AccessToken
 import com.quid.auth.global.token.usecase.TokenEncoder
 import com.quid.auth.user.domain.UserDetail
 import com.quid.auth.user.gateway.web.response.TokenResponse
@@ -24,8 +23,7 @@ fun interface LogIn {
                 .let { authenticationManagerBuilder.getObject().authenticate(it) }
                 .let { it.principal as UserDetail }
                 .let {
-                    Token(
-                        sub = TokenType.ACCESS,
+                    AccessToken(
                         username = it.username,
                         exp = LocalDateTime.now().plusHours(1)
                     )

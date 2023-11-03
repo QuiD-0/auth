@@ -13,8 +13,7 @@ class TokenTest {
     @DisplayName("토큰 생성")
     fun makeToken() {
         assertDoesNotThrow {
-            Token(
-                sub = ACCESS,
+            AccessToken(
                 exp = LocalDateTime.now().plusHours(1),
                 username = "user"
             )
@@ -25,8 +24,7 @@ class TokenTest {
     @DisplayName("토큰 시크릿은 32바이트 이상이어야 한다.")
     fun tokenSecretError() {
         assertThrows<IllegalArgumentException> {
-            Token(
-                sub = ACCESS,
+            AccessToken(
                 exp = LocalDateTime.now().plusDays(1),
                 username = "user"
             )

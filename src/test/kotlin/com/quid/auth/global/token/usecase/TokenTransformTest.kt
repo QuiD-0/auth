@@ -1,5 +1,6 @@
 package com.quid.auth.global.token.usecase
 
+import com.quid.auth.global.token.domain.AccessToken
 import com.quid.auth.global.token.domain.Token
 import com.quid.auth.global.token.domain.TokenType.ACCESS
 import com.quid.auth.global.token.usecase.TokenDecoder.JwtTokenDecoder
@@ -15,8 +16,7 @@ class TokenTransformTest {
     private lateinit var tokenEncoder: TokenEncoder
     private lateinit var tokenDecoder: TokenDecoder
 
-    private val token = Token(
-        sub = ACCESS,
+    private val token = AccessToken(
         exp = LocalDateTime.now().plusHours(1),
         username = "user"
     )
