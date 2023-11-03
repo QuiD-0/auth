@@ -22,12 +22,13 @@ class JwtAuthenticationFilter(
             val accessToken = getToken(request)
                 .run { tokenDecoder(this) }
 
-            UsernamePasswordAuthenticationToken(
-                userAuthService.loadUserByUsername(accessToken.payload.username),
-                null,
-                emptyList()
-            ).also { SecurityContextHolder.getContext().authentication = it }
+            val user = userAuthService.loadUserByUsername(accessToken.payload.username)
+
+            UsernamePasswordAuthenticationToken(user, null, user.authorities)
+                .also { SecurityContextHolder.getContext().authentication = it }
+
         } catch (e: Exception) {
+            request.setAttribute("Exception", e)
             SecurityContextHolder.clearContext()
         }
         filterChain.doFilter(request, response)

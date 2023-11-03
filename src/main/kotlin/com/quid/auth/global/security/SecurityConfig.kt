@@ -1,5 +1,6 @@
 package com.quid.auth.global.security
 
+import com.quid.auth.global.security.filter.JwtAuthenticationEntryPoint
 import com.quid.auth.global.security.filter.JwtAuthenticationFilter
 import com.quid.auth.global.token.usecase.TokenDecoder
 import com.quid.auth.user.usecase.UserAuthService
@@ -19,6 +20,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
+    private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
     private val userAuthService: UserAuthService,
     private val jwtTokenDecoder: TokenDecoder,
 ) {
@@ -28,6 +30,9 @@ class SecurityConfig(
         http.httpBasic { it.disable() }
             .csrf { it.disable() }
             .formLogin { it.disable() }
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .and()
             .addFilterBefore(
                 JwtAuthenticationFilter(
                     jwtTokenDecoder,
