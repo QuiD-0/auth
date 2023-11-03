@@ -18,15 +18,18 @@ class JwtAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val accessToken = getToken(request)
-            .run { tokenDecoder(this) }
+        try {
+            val accessToken = getToken(request)
+                .run { tokenDecoder(this) }
 
-        UsernamePasswordAuthenticationToken(
-            userAuthService.loadUserByUsername(accessToken.payload.username),
-            null,
-            emptyList()
-        ).also { SecurityContextHolder.getContext().authentication = it }
-
+            UsernamePasswordAuthenticationToken(
+                userAuthService.loadUserByUsername(accessToken.payload.username),
+                null,
+                emptyList()
+            ).also { SecurityContextHolder.getContext().authentication = it }
+        } catch (e: Exception) {
+            SecurityContextHolder.clearContext()
+        }
         filterChain.doFilter(request, response)
     }
 
