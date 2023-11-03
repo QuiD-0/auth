@@ -1,6 +1,8 @@
 package com.quid.auth.global.token.usecase
 
 import com.quid.auth.global.token.domain.AccessToken
+import com.quid.auth.global.token.domain.Header
+import com.quid.auth.global.token.domain.Payload
 import com.quid.auth.global.token.domain.Token
 import com.quid.auth.global.token.domain.TokenType.ACCESS
 import com.quid.auth.global.token.usecase.TokenDecoder.JwtTokenDecoder
@@ -16,7 +18,14 @@ class TokenTransformTest {
     private lateinit var tokenEncoder: TokenEncoder
     private lateinit var tokenDecoder: TokenDecoder
 
-    private val token = AccessToken("test")
+    private val token = AccessToken(
+        Header.default(),
+        Payload(
+            sub = ACCESS,
+            exp = LocalDateTime.now().plusYears(999),
+            username = "test"
+        )
+    )
 
     @Test
     @DisplayName("JWT토큰 인코딩")
