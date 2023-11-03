@@ -1,10 +1,8 @@
 package com.quid.auth.global.token.usecase
 
-import com.quid.auth.global.token.domain.Payload
 import com.quid.auth.global.token.domain.Token
-import com.quid.auth.global.token.domain.TokenType
 import com.quid.auth.global.token.domain.TokenType.ACCESS
-import com.quid.auth.global.token.usecase.TokenDecoder.*
+import com.quid.auth.global.token.usecase.TokenDecoder.JwtTokenDecoder
 import com.quid.auth.global.token.usecase.TokenEncoder.JwtTokenEncoder
 import io.jsonwebtoken.security.SignatureException
 import org.junit.jupiter.api.DisplayName
@@ -18,11 +16,9 @@ class TokenTransformTest {
     private lateinit var tokenDecoder: TokenDecoder
 
     private val token = Token(
-        Payload(
-            sub = ACCESS,
-            exp = LocalDateTime.now().plusHours(1),
-            username = "user"
-        )
+        sub = ACCESS,
+        exp = LocalDateTime.now().plusHours(1),
+        username = "user"
     )
 
     @Test
@@ -36,7 +32,7 @@ class TokenTransformTest {
 
     @Test
     @DisplayName("JWT토큰 디코딩")
-    fun decodeToken(){
+    fun decodeToken() {
         tokenDecoder = JwtTokenDecoder("this_is_test_secret_code_for_token_provider")
 
         assertDoesNotThrow {
@@ -52,7 +48,7 @@ class TokenTransformTest {
 
     @Test
     @DisplayName("secret이 다를경우 에러 발생")
-    fun decodeError(){
+    fun decodeError() {
         tokenEncoder = JwtTokenEncoder("this_is_test_secret_code_for_token_provider")
 
         val token = tokenEncoder(token)
