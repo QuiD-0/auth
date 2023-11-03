@@ -30,9 +30,9 @@ class SecurityConfig(
         http.httpBasic { it.disable() }
             .csrf { it.disable() }
             .formLogin { it.disable() }
-            .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            .and()
+            .exceptionHandling{
+                it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            }
             .addFilterBefore(
                 JwtAuthenticationFilter(
                     jwtTokenDecoder,
