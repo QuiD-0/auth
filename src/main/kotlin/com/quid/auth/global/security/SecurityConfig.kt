@@ -43,6 +43,7 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests{
                 it.requestMatchers(*allow()).permitAll()
+                it.requestMatchers(*admin()).hasRole("ADMIN")
                 it.anyRequest().authenticated()
             }
             .build()
@@ -54,6 +55,12 @@ class SecurityConfig(
         AntPathRequestMatcher("/", "GET"),
         AntPathRequestMatcher("/api/user/login", "POST"),
         AntPathRequestMatcher("/api/user/signup", "POST"),
+        AntPathRequestMatcher("/api/token/refresh", "POST"),
+    )
+
+    private fun admin(): Array<RequestMatcher> = arrayOf(
+        AntPathRequestMatcher("/api/admin/**", "GET"),
+        AntPathRequestMatcher("/api/admin/**", "POST"),
     )
 
 }

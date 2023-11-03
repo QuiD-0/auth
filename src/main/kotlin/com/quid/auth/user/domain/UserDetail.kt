@@ -12,7 +12,7 @@ data class UserDetail (
         get() = user.name
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf()
+        return mutableListOf(GrantedAuthority { "ROLE_" + authority.authorityName })
     }
 
     override fun getPassword(): String {
