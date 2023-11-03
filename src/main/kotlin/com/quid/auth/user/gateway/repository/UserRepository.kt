@@ -27,6 +27,7 @@ interface UserRepository {
                 ?.toUser()
                 ?: throw IllegalArgumentException("User not found: $username")
 
+        @Transactional(readOnly = true)
         override fun existsByUsername(username: String): Boolean =
             userJpaRepository.existsByUsername(username)
     }

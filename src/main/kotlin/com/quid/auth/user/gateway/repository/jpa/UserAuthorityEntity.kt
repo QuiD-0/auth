@@ -14,14 +14,12 @@ class UserAuthorityEntity(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     val authoritySeq: Long? = null,
-    val authorityLevel: Int,
     val authorityName: String,
     val regDate: LocalDateTime,
     val deleted: Boolean,
 ) {
     fun toUserAuthority() = UserAuthority(
         authoritySeq,
-        authorityLevel,
         authorityName,
         regDate,
         deleted,

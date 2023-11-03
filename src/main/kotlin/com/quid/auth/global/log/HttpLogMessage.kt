@@ -17,11 +17,11 @@ data class HttpLogMessage(
         return """
             |
             |================== HTTP LOG ==================
-            |HTTP METHOD : $httpMethod
-            |REQUEST URI : $requestUri
-            |HTTP STATUS : $httpStatus
-            |ELAPSED TIME : $elapsedTime
+            |REQUEST URI : $httpMethod $requestUri
+            |HTTP RESPONSE : $httpStatus, $elapsedTime SECONDS
             |REQUEST BODY : $requestBody
+            |==============================================
+            |
         """.trimMargin()
     }
 }
