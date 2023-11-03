@@ -2,6 +2,7 @@ package com.quid.auth.global.token.usecase
 
 import com.quid.auth.global.token.domain.AccessToken
 import com.quid.auth.global.token.domain.RefreshToken
+import com.quid.auth.global.token.domain.Token
 import com.quid.auth.global.token.gateway.repository.RefreshTokenRepository
 import com.quid.auth.global.token.gateway.repository.model.UserToken
 import com.quid.auth.user.gateway.web.response.TokenResponse
@@ -17,8 +18,8 @@ fun interface RefreshAccessToken {
         private val refreshTokenRepository: RefreshTokenRepository
     ) : RefreshAccessToken {
         override fun invoke(accessTokenString: String, refreshTokenString: String): TokenResponse {
-            val accessToken: AccessToken = tokenDecoder(accessTokenString) as AccessToken
-            val refreshToken: RefreshToken = tokenDecoder(refreshTokenString) as RefreshToken
+            val accessToken: Token = tokenDecoder(accessTokenString)
+            val refreshToken: Token = tokenDecoder(refreshTokenString)
             require(accessToken.isExpired()) { "access token is not expired" }
             require(refreshToken.isNotExpired()) { "refresh token is expired" }
 
