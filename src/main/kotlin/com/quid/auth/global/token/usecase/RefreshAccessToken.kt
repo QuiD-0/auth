@@ -20,7 +20,7 @@ fun interface RefreshAccessToken {
             val accessToken: AccessToken = tokenDecoder(accessTokenString) as AccessToken
             val refreshToken: RefreshToken = tokenDecoder(refreshTokenString) as RefreshToken
             require(accessToken.isExpired()) { "access token is not expired" }
-            require(!refreshToken.isExpired()) { "refresh token is expired" }
+            require(refreshToken.isNotExpired()) { "refresh token is expired" }
 
             val refreshJti = refreshTokenRepository.findByUsername(accessToken.username)
             require(refreshToken.payload.jti == refreshJti) { "refresh token is not matched" }

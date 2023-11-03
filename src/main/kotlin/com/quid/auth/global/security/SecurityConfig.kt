@@ -59,8 +59,7 @@ class SecurityConfig(
     )
 
     private fun admin(): Array<RequestMatcher> = arrayOf(
-        AntPathRequestMatcher("/api/admin/**", "GET"),
-        AntPathRequestMatcher("/api/admin/**", "POST"),
+        AntPathRequestMatcher("/api/admin/**/", "POST"),
     )
 
 }

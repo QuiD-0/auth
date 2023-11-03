@@ -21,6 +21,7 @@ class JwtAuthenticationFilter(
         try {
             val accessToken = getToken(request)
                 .run { tokenDecoder(this) }
+            require(accessToken.isNotExpired()) { "access token is expired" }
 
             val user = userAuthService.loadUserByUsername(accessToken.username)
 

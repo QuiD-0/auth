@@ -6,6 +6,7 @@ sealed interface Token {
     val header: Header
     val payload: Payload
     fun isExpired(): Boolean = payload.exp.isBefore(LocalDateTime.now())
+    fun isNotExpired(): Boolean = !payload.exp.isBefore(LocalDateTime.now())
     val username: String
         get() = payload.username
 }
