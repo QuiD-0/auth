@@ -2,7 +2,7 @@ package com.quid.auth.global.token.domain
 
 import java.time.LocalDateTime
 
-sealed interface Token{
+sealed interface Token {
     val header: Header
     val payload: Payload
 }
@@ -10,8 +10,8 @@ sealed interface Token{
 data class AccessToken(
     override val header: Header = Header(),
     override val payload: Payload,
-):Token {
-    constructor(exp: LocalDateTime, username: String) : this(
+) : Token {
+    constructor(username: String, exp: LocalDateTime) : this(
         payload = Payload(
             sub = TokenType.ACCESS,
             exp = exp,
@@ -23,12 +23,12 @@ data class AccessToken(
 data class RefreshToken(
     override val header: Header = Header(),
     override val payload: Payload,
-):Token {
-    constructor(exp: LocalDateTime, username: String) : this(
+) : Token {
+    constructor(exp: LocalDateTime) : this(
         payload = Payload(
             sub = TokenType.REFRESH,
             exp = exp,
-            username = username
+            username = ""
         )
     )
 }
