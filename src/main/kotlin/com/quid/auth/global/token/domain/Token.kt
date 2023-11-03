@@ -16,12 +16,8 @@ data class AccessToken(
     override val payload: Payload,
 ) : Token {
 
-    constructor(username: String, exp: LocalDateTime = LocalDateTime.now().plusMinutes(30)) : this(
-        payload = Payload(
-            sub = TokenType.ACCESS,
-            exp = exp,
-            username = username
-        )
+    constructor(username: String) : this(
+        payload = Payload.accessType(username)
     )
 }
 
@@ -30,12 +26,8 @@ data class RefreshToken(
     override val payload: Payload,
 ) : Token {
 
-    constructor(exp: LocalDateTime = LocalDateTime.now().plusDays(7)) : this(
-        payload = Payload(
-            sub = TokenType.REFRESH,
-            exp = exp,
-            username = ""
-        )
+    constructor() : this(
+        payload = Payload.refreshType()
     )
 }
 

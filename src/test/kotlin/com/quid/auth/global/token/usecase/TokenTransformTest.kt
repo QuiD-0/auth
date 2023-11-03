@@ -16,10 +16,7 @@ class TokenTransformTest {
     private lateinit var tokenEncoder: TokenEncoder
     private lateinit var tokenDecoder: TokenDecoder
 
-    private val token = AccessToken(
-        exp = LocalDateTime.now().plusYears(999),
-        username = "test"
-    )
+    private val token = AccessToken("test")
 
     @Test
     @DisplayName("JWT토큰 인코딩")

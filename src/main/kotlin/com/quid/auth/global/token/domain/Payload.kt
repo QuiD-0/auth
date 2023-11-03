@@ -25,4 +25,9 @@ data class Payload(
     init {
         require(exp.isAfter(iat)) { "토큰 만료시간은 발급시간보다 빠를수 없습니다." }
     }
+
+    companion object{
+        fun accessType(username: String) = Payload(sub = TokenType.ACCESS, exp = LocalDateTime.now().plusMinutes(30), username = username)
+        fun refreshType() = Payload(sub = TokenType.REFRESH, exp = LocalDateTime.now().plusDays(7), username = "")
+    }
 }

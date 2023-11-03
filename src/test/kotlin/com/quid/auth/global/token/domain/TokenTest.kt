@@ -12,10 +12,7 @@ class TokenTest {
     @DisplayName("토큰 생성")
     fun makeToken() {
         assertDoesNotThrow {
-            AccessToken(
-                exp = LocalDateTime.now().plusHours(1),
-                username = "user"
-            )
+            AccessToken("user")
         }
     }
 
