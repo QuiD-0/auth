@@ -1,5 +1,6 @@
 package com.quid.auth.user.gateway.repository.jpa
 
+import com.quid.auth.user.domain.AuthorityType
 import com.quid.auth.user.domain.UserAuthority
 import java.time.LocalDateTime
 import javax.persistence.Entity
@@ -20,7 +21,7 @@ class UserAuthorityEntity(
 ) {
     fun toUserAuthority() = UserAuthority(
         authoritySeq,
-        authorityName,
+        AuthorityType.valueOf(authorityName),
         regDate,
         deleted,
     )

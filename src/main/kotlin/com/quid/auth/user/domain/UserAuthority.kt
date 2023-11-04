@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 data class UserAuthority(
     val authoritySeq: Long? = null,
-    val authorityName: String,
+    val authorityName: AuthorityType,
     val regDate: LocalDateTime = LocalDateTime.now(),
     val deleted: Boolean = false,
 ) {
