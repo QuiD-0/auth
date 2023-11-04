@@ -5,7 +5,7 @@ import com.quid.auth.global.token.domain.RefreshToken
 import com.quid.auth.global.token.domain.Token
 import com.quid.auth.global.token.gateway.repository.RefreshTokenRepository
 import com.quid.auth.global.token.gateway.repository.model.UserToken
-import com.quid.auth.user.gateway.web.response.TokenResponse
+import com.quid.auth.global.token.gateway.web.response.TokenResponse
 import org.springframework.stereotype.Service
 
 fun interface RefreshAccessToken {

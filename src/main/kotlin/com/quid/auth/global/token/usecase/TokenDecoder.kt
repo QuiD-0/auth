@@ -24,6 +24,6 @@ interface TokenDecoder {
                 .parse(token)
                 .let { it.body as Claims }
                 .let { Payload(it) }
-                .let { AccessToken(payload = it) }
+                .let { AccessToken(it) }
     }
 }

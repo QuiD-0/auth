@@ -12,6 +12,7 @@ interface UserRepository {
     fun save(user: User): User
     fun findByUsername(username: String): User
     fun existsByUsername(username: String): Boolean
+    fun findByAuthoritySeq(authoritySeq: Long): List<User>
 
     @Repository
     class UserRepositoryImpl(
@@ -30,6 +31,11 @@ interface UserRepository {
         @Transactional(readOnly = true)
         override fun existsByUsername(username: String): Boolean =
             userJpaRepository.existsByUsername(username)
+
+        @Transactional(readOnly = true)
+        override fun findByAuthoritySeq(authoritySeq: Long): List<User> =
+            userJpaRepository.findByAuthorityId(authoritySeq)
+                .map { it.toUser() }
     }
 
 }

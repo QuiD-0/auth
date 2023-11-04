@@ -6,7 +6,7 @@ import com.quid.auth.global.token.domain.RefreshToken
 import com.quid.auth.global.token.gateway.repository.model.UserToken
 import com.quid.auth.global.token.usecase.TokenEncoder
 import com.quid.auth.user.domain.UserDetail
-import com.quid.auth.user.gateway.web.response.TokenResponse
+import com.quid.auth.global.token.gateway.web.response.TokenResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service

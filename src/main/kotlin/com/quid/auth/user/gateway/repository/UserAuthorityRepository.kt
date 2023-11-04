@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 
 interface UserAuthorityRepository {
     fun findById(authorityId: Long): UserAuthority
+    fun findByName(name: String): UserAuthority
 
     @Repository
     class UserAuthorityRepositoryImpl(
@@ -19,5 +20,11 @@ interface UserAuthorityRepository {
             jpaRepository.findByIdOrNull(authorityId)
                 ?.toUserAuthority()
                 ?: throw IllegalArgumentException("UserAuthority not found: $authorityId")
+
+        @Transactional(readOnly = true)
+        override fun findByName(name: String): UserAuthority =
+            jpaRepository.findByAuthorityName(name)
+                ?.toUserAuthority()
+                ?: throw IllegalArgumentException("UserAuthority not found: $name")
     }
 }
