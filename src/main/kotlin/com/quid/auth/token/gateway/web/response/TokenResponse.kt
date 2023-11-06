@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.gateway.web.response
+package com.quid.auth.token.gateway.web.response
 
 data class TokenResponse(
     val accessToken: String,

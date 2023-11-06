@@ -1,6 +1,6 @@
-package com.quid.auth.global.token.usecase
+package com.quid.auth.token.usecase
 
-import com.quid.auth.global.token.domain.Token
+import com.quid.auth.token.domain.Token
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys

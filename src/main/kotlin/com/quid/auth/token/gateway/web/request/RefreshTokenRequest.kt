@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.gateway.web.request
+package com.quid.auth.token.gateway.web.request
 
 data class RefreshTokenRequest(
     val accessToken: String,

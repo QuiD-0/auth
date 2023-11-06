@@ -1,10 +1,9 @@
 package com.quid.auth.global.token.domain
 
+import com.quid.auth.token.domain.AccessToken
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
-import org.junit.jupiter.api.assertThrows
-import java.time.LocalDateTime
 
 class TokenTest {
 

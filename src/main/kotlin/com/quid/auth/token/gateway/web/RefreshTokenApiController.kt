@@ -1,10 +1,10 @@
-package com.quid.auth.global.token.gateway.web
+package com.quid.auth.token.gateway.web
 
 import com.quid.auth.global.api.ApiResponse
 import com.quid.auth.global.api.Success
-import com.quid.auth.global.token.gateway.web.request.RefreshTokenRequest
-import com.quid.auth.global.token.usecase.RefreshAccessToken
-import com.quid.auth.global.token.gateway.web.response.TokenResponse
+import com.quid.auth.token.gateway.web.request.RefreshTokenRequest
+import com.quid.auth.token.usecase.RefreshAccessToken
+import com.quid.auth.token.gateway.web.response.TokenResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

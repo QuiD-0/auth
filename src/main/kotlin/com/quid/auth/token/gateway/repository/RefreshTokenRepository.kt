@@ -1,6 +1,6 @@
-package com.quid.auth.global.token.gateway.repository
+package com.quid.auth.token.gateway.repository
 
-import com.quid.auth.global.token.gateway.repository.model.UserToken
+import com.quid.auth.token.gateway.repository.model.UserToken
 import org.springframework.stereotype.Repository
 
 interface RefreshTokenRepository {

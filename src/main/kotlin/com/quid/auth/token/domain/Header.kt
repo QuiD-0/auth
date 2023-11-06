@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.domain
+package com.quid.auth.token.domain
 
 data class Header(
     val typ: String,

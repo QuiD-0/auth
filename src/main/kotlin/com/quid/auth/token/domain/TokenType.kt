@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.domain
+package com.quid.auth.token.domain
 
 enum class TokenType {
     ACCESS, REFRESH;

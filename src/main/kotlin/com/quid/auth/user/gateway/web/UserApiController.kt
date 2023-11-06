@@ -4,7 +4,7 @@ import com.quid.auth.global.api.ApiResponse
 import com.quid.auth.global.api.Success
 import com.quid.auth.user.gateway.web.request.LogInRequest
 import com.quid.auth.user.gateway.web.request.SignUpRequest
-import com.quid.auth.global.token.gateway.web.response.TokenResponse
+import com.quid.auth.token.gateway.web.response.TokenResponse
 import com.quid.auth.user.usecase.LogIn
 import com.quid.auth.user.usecase.SignUp
 import org.springframework.web.bind.annotation.PostMapping

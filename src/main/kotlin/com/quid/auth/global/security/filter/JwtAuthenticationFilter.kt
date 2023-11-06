@@ -1,6 +1,6 @@
 package com.quid.auth.global.security.filter
 
-import com.quid.auth.global.token.usecase.TokenDecoder
+import com.quid.auth.token.usecase.TokenDecoder
 import com.quid.auth.user.usecase.UserAuthService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder

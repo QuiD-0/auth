@@ -2,7 +2,7 @@ package com.quid.auth.global.security
 
 import com.quid.auth.global.security.filter.JwtAuthenticationEntryPoint
 import com.quid.auth.global.security.filter.JwtAuthenticationFilter
-import com.quid.auth.global.token.usecase.TokenDecoder
+import com.quid.auth.token.usecase.TokenDecoder
 import com.quid.auth.user.usecase.UserAuthService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
