@@ -16,7 +16,7 @@ data class Payload(
     constructor(claims: Claims) : this(
         jti = claims.id,
         iss = claims.issuer,
-        sub = TokenType.of(claims.subject),
+        sub = TokenType.valueOf(claims.subject),
         iat = claims.issuedAt.toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime(),
         exp = claims.expiration.toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime(),
         username = claims["username"] as String
