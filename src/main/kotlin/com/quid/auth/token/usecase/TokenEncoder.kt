@@ -26,7 +26,7 @@ fun interface TokenEncoder {
             setIssuer(token.payload.iss)
             setExpiration(Date(token.payload.exp.toEpochSecond(ZoneOffset.UTC) * 1000))
             setIssuedAt(Date(token.payload.iat.toEpochSecond(ZoneOffset.UTC) * 1000))
-            setId(token.payload.jti)
+            setId(token.id)
             claim("username", token.username)
         }.signWith(
             Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8)),

@@ -7,8 +7,9 @@ sealed interface Token {
     val payload: Payload
     val username: String
         get() = payload.username
-    fun isExpired(): Boolean = payload.exp.isBefore(LocalDateTime.now())
     fun isNotExpired(): Boolean = !payload.exp.isBefore(LocalDateTime.now())
+    val id: String
+        get() = payload.jti
 }
 
 data class AccessToken(

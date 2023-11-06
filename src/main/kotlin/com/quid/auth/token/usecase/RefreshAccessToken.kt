@@ -20,11 +20,10 @@ fun interface RefreshAccessToken {
         override fun invoke(accessTokenString: String, refreshTokenString: String): TokenResponse {
             val accessToken: Token = tokenDecoder(accessTokenString)
             val refreshToken: Token = tokenDecoder(refreshTokenString)
-            require(accessToken.isExpired()) { "access token is not expired" }
             require(refreshToken.isNotExpired()) { "refresh token is expired" }
 
             val refreshJti = refreshTokenRepository.findByUsername(accessToken.username)
-            require(refreshToken.payload.jti == refreshJti) { "refresh token is not matched" }
+            require(refreshToken.id == refreshJti) { "refresh token is not matched" }
 
             val newAccessToken = getNewAccessToken(accessToken.username)
             val newRefreshToken = getNewRefreshToken(accessToken.username)
@@ -38,7 +37,7 @@ fun interface RefreshAccessToken {
                     refreshTokenRepository.save(
                         UserToken(
                             username,
-                            it.payload.jti
+                            it.id
                         )
                     )
                 }.let { tokenEncoder(it) }

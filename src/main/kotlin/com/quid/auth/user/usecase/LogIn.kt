@@ -31,7 +31,7 @@ fun interface LogIn {
                 .let { tokenEncoder(it) }
 
             val refreshToken = RefreshToken()
-                .also { refreshTokenRepository.save(UserToken(username, it.payload.jti)) }
+                .also { refreshTokenRepository.save(UserToken(username, it.id)) }
                 .run { tokenEncoder(this) }
 
             return TokenResponse(accessToken, refreshToken)

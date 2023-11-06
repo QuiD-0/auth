@@ -7,6 +7,7 @@ interface RefreshTokenRepository {
 
     fun save(userToken: UserToken)
     fun findByUsername(username: String): String
+    fun deleteByUsername(username: String)
 
     @Repository
     class InMemoryRefreshTokenRepository : RefreshTokenRepository {
@@ -18,5 +19,9 @@ interface RefreshTokenRepository {
 
         override fun findByUsername(username: String): String =
             refreshToken[username]?: throw IllegalArgumentException("refresh token not found")
+
+        override fun deleteByUsername(username: String) {
+            refreshToken.remove(username)
+        }
     }
 }

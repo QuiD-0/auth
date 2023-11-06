@@ -30,6 +30,7 @@ data class Payload(
         fun accessType(username: String) = Payload(
             sub = TokenType.ACCESS,
             exp = LocalDateTime.now().plusMinutes(30),
+            iat = LocalDateTime.now().minusSeconds(1),
             username = username
         )
 

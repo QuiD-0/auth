@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.domain
+package com.quid.auth.token.domain
 
 import com.quid.auth.token.domain.AccessToken
 import org.junit.jupiter.api.DisplayName

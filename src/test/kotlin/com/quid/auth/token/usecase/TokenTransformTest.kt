@@ -1,4 +1,4 @@
-package com.quid.auth.global.token.usecase
+package com.quid.auth.token.usecase
 
 import com.quid.auth.token.domain.AccessToken
 import com.quid.auth.token.domain.Header
