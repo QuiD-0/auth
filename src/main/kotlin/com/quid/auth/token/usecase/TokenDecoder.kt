@@ -4,6 +4,7 @@ import com.quid.auth.token.domain.AccessToken
 import com.quid.auth.token.domain.Payload
 import com.quid.auth.token.domain.Token
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -20,10 +21,16 @@ interface TokenDecoder {
     ): TokenDecoder {
 
         override fun invoke(token: String): Token =
-            Jwts.parserBuilder().setSigningKey(secret.toByteArray(StandardCharsets.UTF_8)).build()
-                .parse(token)
-                .let { it.body as Claims }
-                .let { Payload(it) }
-                .let { AccessToken(it) }
+            try {
+                Jwts.parserBuilder().setSigningKey(secret.toByteArray(StandardCharsets.UTF_8)).build()
+                    .parse(token)
+                    .let { it.body as Claims }
+                    .let { Payload(it) }
+                    .let { AccessToken(it) }
+            } catch (exp: ExpiredJwtException){
+                Payload(exp.claims)
+                    .run { AccessToken(this) }
+            }
+
     }
 }
