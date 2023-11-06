@@ -18,13 +18,9 @@ data class AccessToken(
     override val header: Header,
     override val payload: Payload,
 ) : Token {
-    constructor(payload: Payload) : this(
-        Header.default(),
+    constructor(payload: Payload, header: Header = Header.default()) : this(
+        header,
         payload
-    )
-    constructor(username: String) : this(
-        Header.default(),
-        Payload.accessType(username)
     )
 }
 

@@ -2,6 +2,7 @@ package com.quid.auth.user.usecase
 
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
 import com.quid.auth.token.domain.AccessToken
+import com.quid.auth.token.domain.Payload
 import com.quid.auth.token.domain.RefreshToken
 import com.quid.auth.token.gateway.repository.model.UserTokenJti
 import com.quid.auth.token.usecase.TokenEncoder
@@ -25,9 +26,8 @@ fun interface LogIn {
             val accessToken = UsernamePasswordAuthenticationToken(username, password)
                 .let { authenticationManagerBuilder.getObject().authenticate(it) }
                 .let { it.principal as UserDetail }
-                .let {
-                    AccessToken(it.username)
-                }
+                .let { Payload.accessType(it.username) }
+                .let { AccessToken(it) }
                 .let { tokenEncoder(it) }
 
             val refreshToken = RefreshToken()

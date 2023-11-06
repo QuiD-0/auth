@@ -1,6 +1,7 @@
 package com.quid.auth.token.usecase
 
 import com.quid.auth.token.domain.AccessToken
+import com.quid.auth.token.domain.Payload
 import com.quid.auth.token.domain.RefreshToken
 import com.quid.auth.token.domain.Token
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
@@ -38,7 +39,7 @@ fun interface RefreshAccessToken {
                 .let { tokenEncoder(it) }
 
         private fun getNewAccessToken(username: String) =
-            AccessToken(username)
+            AccessToken(Payload.accessType(username))
                 .run { tokenEncoder(this) }
     }
 }
