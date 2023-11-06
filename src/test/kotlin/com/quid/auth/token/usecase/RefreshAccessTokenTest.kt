@@ -5,7 +5,7 @@ import com.quid.auth.token.domain.Payload
 import com.quid.auth.token.domain.RefreshToken
 import com.quid.auth.token.domain.TokenType
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
-import com.quid.auth.token.gateway.repository.model.UserToken
+import com.quid.auth.token.gateway.repository.model.UserTokenJti
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -37,7 +37,7 @@ class RefreshAccessTokenTest{
             )
         )
         val refreshToken = RefreshToken()
-        refreshTokenRepository.save(UserToken("test", refreshToken.id))
+        refreshTokenRepository.save(UserTokenJti("test", refreshToken.id))
 
         refreshAccessToken(tokenEncoder(expiredToken), tokenEncoder(refreshToken))
             .also {
@@ -59,7 +59,7 @@ class RefreshAccessTokenTest{
             )
         )
         val refreshToken = RefreshToken()
-        refreshTokenRepository.save(UserToken("test", refreshToken.id))
+        refreshTokenRepository.save(UserTokenJti("test", refreshToken.id))
 
         assertThrows<IllegalArgumentException> {
             refreshAccessToken(tokenEncoder(expiredToken), tokenEncoder(refreshToken))

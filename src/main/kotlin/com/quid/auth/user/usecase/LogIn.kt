@@ -3,7 +3,7 @@ package com.quid.auth.user.usecase
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
 import com.quid.auth.token.domain.AccessToken
 import com.quid.auth.token.domain.RefreshToken
-import com.quid.auth.token.gateway.repository.model.UserToken
+import com.quid.auth.token.gateway.repository.model.UserTokenJti
 import com.quid.auth.token.usecase.TokenEncoder
 import com.quid.auth.user.domain.UserDetail
 import com.quid.auth.token.gateway.web.response.TokenResponse
@@ -31,7 +31,7 @@ fun interface LogIn {
                 .let { tokenEncoder(it) }
 
             val refreshToken = RefreshToken()
-                .also { refreshTokenRepository.save(UserToken(username, it.id)) }
+                .also { refreshTokenRepository.save(UserTokenJti(username, it.id)) }
                 .run { tokenEncoder(this) }
 
             return TokenResponse(accessToken, refreshToken)

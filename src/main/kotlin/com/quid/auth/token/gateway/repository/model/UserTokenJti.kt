@@ -1,7 +1,7 @@
 package com.quid.auth.token.gateway.repository.model
 
-data class UserToken(
+data class UserTokenJti(
     val username: String,
-    val refreshToken: String,
+    val refreshTokenJti: String,
 ) {
 }

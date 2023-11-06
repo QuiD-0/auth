@@ -4,7 +4,7 @@ import com.quid.auth.token.domain.AccessToken
 import com.quid.auth.token.domain.RefreshToken
 import com.quid.auth.token.domain.Token
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
-import com.quid.auth.token.gateway.repository.model.UserToken
+import com.quid.auth.token.gateway.repository.model.UserTokenJti
 import com.quid.auth.token.gateway.web.response.TokenResponse
 import org.springframework.stereotype.Service
 
@@ -34,14 +34,8 @@ fun interface RefreshAccessToken {
 
         private fun getNewRefreshToken(username: String) =
             RefreshToken()
-                .also {
-                    refreshTokenRepository.save(
-                        UserToken(
-                            username,
-                            it.id
-                        )
-                    )
-                }.let { tokenEncoder(it) }
+                .also { refreshTokenRepository.save(UserTokenJti(username, it.id)) }
+                .let { tokenEncoder(it) }
 
         private fun getNewAccessToken(username: String) =
             AccessToken(username)
