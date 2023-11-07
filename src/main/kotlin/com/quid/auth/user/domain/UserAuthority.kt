@@ -9,4 +9,5 @@ data class UserAuthority(
     val regDate: LocalDateTime = LocalDateTime.now(),
     val deleted: Boolean = false,
 ) {
+    fun delete() = copy(deleted = true)
 }
