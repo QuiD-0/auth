@@ -2,13 +2,12 @@ package com.quid.auth.user.gateway.repository
 
 import com.quid.auth.user.domain.UserAuthority
 import com.quid.auth.user.gateway.repository.jpa.UserAuthorityJpaRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 interface UserAuthorityRepository {
-    fun findById(authorityId: Long): UserAuthority
-    fun findByName(name: String): UserAuthority
+    fun findByName(name: String): List<UserAuthority>
+    fun findByUserSeq(userSeq: Long): List<UserAuthority>
 
     @Repository
     class UserAuthorityRepositoryImpl(
@@ -16,15 +15,12 @@ interface UserAuthorityRepository {
     ) : UserAuthorityRepository {
 
         @Transactional(readOnly = true)
-        override fun findById(authorityId: Long): UserAuthority =
-            jpaRepository.findByIdOrNull(authorityId)
-                ?.toUserAuthority()
-                ?: throw IllegalArgumentException("UserAuthority not found: $authorityId")
+        override fun findByName(name: String): List<UserAuthority> =
+            jpaRepository.findByAuthorityName(name)
+                .map { it.toUserAuthority() }
 
         @Transactional(readOnly = true)
-        override fun findByName(name: String): UserAuthority =
-            jpaRepository.findByAuthorityName(name)
-                ?.toUserAuthority()
-                ?: throw IllegalArgumentException("UserAuthority not found: $name")
+        override fun findByUserSeq(userSeq: Long): List<UserAuthority> =
+            jpaRepository.findByUserSeq(userSeq).map { it.toUserAuthority() }
     }
 }

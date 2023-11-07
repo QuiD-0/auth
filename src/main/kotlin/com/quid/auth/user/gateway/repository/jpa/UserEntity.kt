@@ -14,7 +14,6 @@ class UserEntity(
     val password: String,
     val email: String,
     val name: String,
-    val authorityId: Long,
     val deleted: Boolean,
 ) {
     fun toUser() = User(
@@ -23,7 +22,6 @@ class UserEntity(
         password = password,
         email = email,
         name = name,
-        authorityId = authorityId,
         deleted = deleted,
     )
 }
@@ -34,6 +32,5 @@ fun UserEntity(user: User) = UserEntity(
     password = user.password,
     email = user.email,
     name = user.name,
-    authorityId = user.authorityId,
     deleted = user.deleted,
 )

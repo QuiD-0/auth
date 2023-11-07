@@ -14,7 +14,7 @@ class UserAuthService(
 ): UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username)
-        val authority = userAuthorityRepository.findById(user.authorityId)
+        val authority = userAuthorityRepository.findByUserSeq(user.userSeq!!)
         return UserDetail(user, authority)
     }
 }

@@ -14,6 +14,6 @@ class AdminApiController(
 
     @PostMapping
     fun getAdminUsers(): List<UserDetailResponse> = findAdmin.adminList()
-        .map { UserDetailResponse(it.name, it.username, it.authority.authorityName.name) }
+        .map { UserDetailResponse(it.name, it.username) }
 
 }

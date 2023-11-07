@@ -6,37 +6,27 @@ import org.springframework.security.core.userdetails.UserDetails
 
 data class UserDetail (
     val user: User,
-    val authority: UserAuthority
+    val authority: List<UserAuthority>
 ): UserDetails{
     val name: String
         get() = user.name
 
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(GrantedAuthority { "ROLE_" + authority.authorityName })
-    }
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
+        authority.map { GrantedAuthority { it.authorityName.name } }.toMutableList()
 
-    override fun getPassword(): String {
-        return user.password
-    }
+    override fun getPassword(): String =
+        user.password
 
-    override fun getUsername(): String {
-        return user.username
-    }
+    override fun getUsername(): String =
+        user.username
 
-    override fun isAccountNonExpired(): Boolean {
-        return !user.deleted
-    }
+    override fun isAccountNonExpired(): Boolean =
+        !user.deleted
 
-    override fun isAccountNonLocked(): Boolean {
-        return true
-    }
+    override fun isAccountNonLocked(): Boolean = true
 
-    override fun isCredentialsNonExpired(): Boolean {
-        return true
-    }
+    override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean {
-        return true
-    }
+    override fun isEnabled(): Boolean = true
 
 }

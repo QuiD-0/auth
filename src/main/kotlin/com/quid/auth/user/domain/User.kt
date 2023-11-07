@@ -6,7 +6,6 @@ data class User(
     val password: String,
     val email: String,
     val name: String,
-    val authorityId: Long = 1,
     val deleted: Boolean = false,
 ) {
     init {

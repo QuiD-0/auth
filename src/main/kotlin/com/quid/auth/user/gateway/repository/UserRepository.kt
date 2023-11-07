@@ -5,14 +5,13 @@ import com.quid.auth.user.gateway.repository.jpa.UserEntity
 import com.quid.auth.user.gateway.repository.jpa.UserJpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
-import java.lang.IllegalArgumentException
 
 interface UserRepository {
 
     fun save(user: User): User
     fun findByUsername(username: String): User
     fun existsByUsername(username: String): Boolean
-    fun findByAuthoritySeq(authoritySeq: Long): List<User>
+    fun findByUserSeqList(ids: List<Long>): List<User>
 
     @Repository
     class UserRepositoryImpl(
@@ -32,9 +31,8 @@ interface UserRepository {
         override fun existsByUsername(username: String): Boolean =
             userJpaRepository.existsByUsername(username)
 
-        @Transactional(readOnly = true)
-        override fun findByAuthoritySeq(authoritySeq: Long): List<User> =
-            userJpaRepository.findByAuthorityId(authoritySeq)
+        override fun findByUserSeqList(ids: List<Long>) =
+            userJpaRepository.findAllById(ids)
                 .map { it.toUser() }
     }
 
