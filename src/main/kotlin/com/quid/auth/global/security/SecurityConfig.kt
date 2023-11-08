@@ -13,6 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.access.AccessDeniedHandler
+import org.springframework.security.web.authentication.AuthenticationFailureHandler
+import org.springframework.security.web.authentication.DelegatingAuthenticationFailureHandler
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.security.web.util.matcher.RequestMatcher
@@ -22,6 +25,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher
 @EnableWebSecurity
 class SecurityConfig(
     private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
+    private val jwtAuthenticationFailureHandler: AccessDeniedHandler,
     private val userAuthService: UserAuthService,
     private val jwtTokenDecoder: TokenDecoder,
 ) {
@@ -33,6 +37,7 @@ class SecurityConfig(
             .formLogin { it.disable() }
             .exceptionHandling{
                 it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                it.accessDeniedHandler(jwtAuthenticationFailureHandler)
             }
             .addFilterBefore(
                 JwtAuthenticationFilter(
