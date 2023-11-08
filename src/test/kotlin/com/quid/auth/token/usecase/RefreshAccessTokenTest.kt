@@ -17,7 +17,7 @@ class RefreshAccessTokenTest{
     private val tokenSecret = "this_is_test_secret_key_for_token_encode_and_decode"
     private val tokenEncoder: TokenEncoder = TokenEncoder.JwtTokenEncoder(tokenSecret)
     private val tokenDecoder: TokenDecoder = TokenDecoder.JwtTokenDecoder(tokenSecret)
-    private val refreshTokenRepository: RefreshTokenRepository = RefreshTokenRepository.InMemoryRefreshTokenRepository()
+    private val refreshTokenRepository: RefreshTokenRepository = RefreshTokenRepository.RedisRefreshTokenRepository()
 
     private val refreshAccessToken: RefreshAccessToken = RefreshAccessToken.RefreshAccessTokenImpl(
         tokenEncoder = tokenEncoder,

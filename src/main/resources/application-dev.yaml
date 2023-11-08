@@ -4,6 +4,9 @@ spring:
     url: jdbc:mysql://localhost:3306/auth?characterEncoding=UTF-8&serverTimezone=UTC
     username: test
     password: testUser
+  redis:
+    host: redis.jaeung.dev
+    port: 6379
 
   jpa:
     hibernate:
