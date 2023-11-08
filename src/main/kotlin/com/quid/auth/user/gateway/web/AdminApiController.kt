@@ -1,5 +1,8 @@
 package com.quid.auth.user.gateway.web
 
+import com.quid.auth.global.api.ApiResponse
+import com.quid.auth.global.api.Success
+import com.quid.auth.user.domain.AuthType
 import com.quid.auth.user.gateway.web.request.GrantAuthorityRequest
 import com.quid.auth.user.gateway.web.request.RevokeAuthorityRequest
 import com.quid.auth.user.gateway.web.response.UserDetailResponse
@@ -20,16 +23,20 @@ class AdminApiController(
 ) {
 
     @PostMapping
-    fun getAdminUsers(): List<UserDetailResponse> = findAdmin.adminList()
+    fun getAdminUsers(): ApiResponse<List<UserDetailResponse>> = findAdmin.adminList()
         .map { UserDetailResponse(it.name, it.username) }
+        .let { Success { it } }
 
     @PostMapping("/grant")
-    fun grantAuthority(@RequestBody request: GrantAuthorityRequest) =
-        request.toDomain()
-            .run { grantAuthority(this) }
+    fun grantUserAuthority(@RequestBody request: GrantAuthorityRequest): ApiResponse<String>  =
+        request
+            .run { grantAuthority(this.userSeq, AuthType.of(this.authority)) }
+            .let { Success { "성공적으로 추가되었습니다." } }
+
 
     @PostMapping("/revoke")
-    fun revokeAuthority(@RequestBody request: RevokeAuthorityRequest) =
+    fun revokeUserAuthority(@RequestBody request: RevokeAuthorityRequest): ApiResponse<String> =
         revokeAuthority(request.userAuthoritySeq)
+            .run { Success { "성공적으로 삭제되었습니다." } }
 
 }

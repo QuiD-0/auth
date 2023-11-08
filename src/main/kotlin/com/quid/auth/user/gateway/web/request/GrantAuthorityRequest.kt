@@ -5,10 +5,10 @@ import com.quid.auth.user.domain.UserAuthority
 
 data class GrantAuthorityRequest(
     val userSeq: Long,
-    val authority: AuthType,
+    val authority: String,
 ){
     fun toDomain()= UserAuthority(
         userSeq = userSeq,
-        authorityName = authority
+        authorityName = AuthType.of(authority)
     )
 }

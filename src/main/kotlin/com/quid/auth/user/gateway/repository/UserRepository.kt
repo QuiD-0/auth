@@ -12,6 +12,7 @@ interface UserRepository {
     fun findByUsername(username: String): User
     fun existsByUsername(username: String): Boolean
     fun findByUserSeqList(ids: List<Long>): List<User>
+    fun existsById(userSeq: Long): Boolean
 
     @Repository
     class UserRepositoryImpl(
@@ -34,6 +35,9 @@ interface UserRepository {
         override fun findByUserSeqList(ids: List<Long>) =
             userJpaRepository.findAllById(ids)
                 .map { it.toUser() }
+
+        override fun existsById(userSeq: Long) =
+            userJpaRepository.existsById(userSeq)
     }
 
 }

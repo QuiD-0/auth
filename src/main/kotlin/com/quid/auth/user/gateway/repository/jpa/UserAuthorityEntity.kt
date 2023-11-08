@@ -4,14 +4,13 @@ import com.quid.auth.user.domain.AuthType
 import com.quid.auth.user.domain.UserAuthority
 import org.hibernate.annotations.Where
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
+import javax.persistence.*
 import javax.persistence.GenerationType.IDENTITY
-import javax.persistence.Id
-import javax.persistence.Table
 
 @Entity
-@Table(name = "user_authority")
+@Table(name = "user_authority", indexes = [
+    Index(name = "idx_user_authority_seq", columnList = "userSeq, authorityName", unique = true),
+])
 @Where(clause = "deleted = false")
 class UserAuthorityEntity(
     @Id
