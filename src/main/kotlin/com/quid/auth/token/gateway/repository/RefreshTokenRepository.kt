@@ -16,11 +16,12 @@ interface RefreshTokenRepository {
     ) : RefreshTokenRepository {
 
         override fun save(userToken: UserTokenJti) {
-            redisTemplate[makeKey(userToken.username)] = userToken.refreshTokenJti
+            redisTemplate[makeKey(userToken.username), userToken.refreshTokenJti] = 604800
         }
 
-        override fun findByUsername(username: String): String =
+        override fun findByUsername(username: String): String=
             redisTemplate[makeKey(username)]
+                ?: throw IllegalArgumentException("RefreshToken not found: $username")
 
         override fun deleteByUsername(username: String) {
             redisTemplate.delete(makeKey(username))

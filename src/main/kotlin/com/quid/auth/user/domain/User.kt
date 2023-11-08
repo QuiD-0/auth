@@ -1,5 +1,7 @@
 package com.quid.auth.user.domain
 
+import java.io.Serializable
+
 data class User(
     val userSeq: Long? = null,
     val username: String,
@@ -7,7 +9,7 @@ data class User(
     val email: String,
     val name: String,
     val deleted: Boolean = false,
-) {
+): Serializable {
     init {
         require(username.length in 4..10) { "ID는 4자 이상 10자 이하 여야 합니다." }
         require(email.matches(emailRegex)) { "이메일 형식이 올바르지 않습니다." }
