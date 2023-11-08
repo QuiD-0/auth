@@ -2,9 +2,9 @@ package com.quid.auth.user.gateway.repository.redis
 
 import com.quid.auth.global.redis.RedisRepository
 import com.quid.auth.user.domain.User
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 
-@Component
+@Repository
 class UserRedisRepository(
     private val redisRepository: RedisRepository<User>
 ){

@@ -3,6 +3,7 @@ package com.quid.auth.user.gateway.repository
 import com.quid.auth.user.domain.UserAuthority
 import com.quid.auth.user.gateway.repository.jpa.UserAuthorityEntity
 import com.quid.auth.user.gateway.repository.jpa.UserAuthorityJpaRepository
+import com.quid.auth.user.gateway.repository.redis.UserAuthorityRedisRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -15,7 +16,8 @@ interface UserAuthorityRepository {
 
     @Repository
     class UserAuthorityRepositoryImpl(
-        val jpaRepository: UserAuthorityJpaRepository
+        val jpaRepository: UserAuthorityJpaRepository,
+        val cache: UserAuthorityRedisRepository
     ) : UserAuthorityRepository {
 
         @Transactional(readOnly = true)
@@ -25,7 +27,9 @@ interface UserAuthorityRepository {
 
         @Transactional(readOnly = true)
         override fun findByUserSeq(userSeq: Long): List<UserAuthority> =
-            jpaRepository.findByUserSeq(userSeq).map { it.toUserAuthority() }
+            cache[userSeq]
+                ?: jpaRepository.findByUserSeq(userSeq).map { it.toUserAuthority() }
+                    .also { cache[userSeq] = it }
 
         @Transactional
         override fun save(userAuthority: UserAuthority): UserAuthority =
