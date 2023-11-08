@@ -36,10 +36,11 @@ interface UserRepository {
         override fun existsByUsername(username: String): Boolean =
             repository.existsByUsername(username)
 
+        @Transactional(readOnly = true)
         override fun findByUserSeqList(ids: List<Long>) =
-            repository.findAllById(ids)
-                .map { it.toUser() }
+            repository.findAllById(ids).map { it.toUser() }
 
+        @Transactional(readOnly = true)
         override fun existsById(userSeq: Long) =
             repository.existsById(userSeq)
     }

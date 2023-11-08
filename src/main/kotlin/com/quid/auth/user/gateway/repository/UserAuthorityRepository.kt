@@ -28,7 +28,8 @@ interface UserAuthorityRepository {
         @Transactional(readOnly = true)
         override fun findByUserSeq(userSeq: Long): List<UserAuthority> =
             cache[userSeq]
-                ?: jpaRepository.findByUserSeq(userSeq).map { it.toUserAuthority() }
+                ?: jpaRepository.findByUserSeq(userSeq)
+                    .map { it.toUserAuthority() }
                     .also { cache[userSeq] = it }
 
         @Transactional
