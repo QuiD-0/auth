@@ -9,9 +9,12 @@ class UserRedisRepository(
     private val redisRepository: RedisRepository<User>
 ){
     operator fun get(username: String): User? =
-        redisRepository[username]
+        redisRepository[makeKey(username)]
 
     operator fun set(username: String, value: User) {
-        redisRepository[username, value] = 15
+        redisRepository[makeKey(username), value] = 15
     }
+
+    private fun makeKey(username: String): String =
+        "user:$username"
 }
