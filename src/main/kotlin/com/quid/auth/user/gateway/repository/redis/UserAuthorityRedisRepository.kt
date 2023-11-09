@@ -6,13 +6,16 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserAuthorityRedisRepository(
-    private val redisListRepository: RedisRepository<UserAuthority>
+    private val redisListRepository: RedisRepository<UserAuthorityRedisHash>
 ) {
     operator fun get(userSeq: Long): List<UserAuthority>? =
         redisListRepository.getAll(makeKey(userSeq))
+            ?.map { it.toDomain() }
+            ?.let { it.ifEmpty { null } }
 
     operator fun set(userSeq: Long, value: List<UserAuthority>) {
-        value.map { redisListRepository.add(makeKey(userSeq), it, 15) }
+        value.forEach { redisListRepository.add(makeKey(userSeq), UserAuthorityRedisHash(it), 15) }
+            .also { redisListRepository.expire(makeKey(userSeq), 15) }
     }
 
     private fun makeKey(userSeq: Long): String =

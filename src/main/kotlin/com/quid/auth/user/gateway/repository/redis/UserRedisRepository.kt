@@ -6,13 +6,13 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserRedisRepository(
-    private val redisRepository: RedisRepository<User>
+    private val redisRepository: RedisRepository<UserRedisHash>
 ){
     operator fun get(username: String): User? =
-        redisRepository[makeKey(username)]
+        redisRepository[makeKey(username)]?.toDomain()
 
     operator fun set(username: String, value: User) {
-        redisRepository[makeKey(username), value] = 15
+        redisRepository[makeKey(username), UserRedisHash(value)] = 15
     }
 
     private fun makeKey(username: String): String =

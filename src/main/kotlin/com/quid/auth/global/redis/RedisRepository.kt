@@ -20,6 +20,9 @@ class RedisRepository <VALUE> (
     fun add(key: String, value: VALUE, seconds: Long) {
         requireNotNull(value)
         redisTemplate.opsForList().rightPush(key, value)
+    }
+
+    fun expire(key: String, seconds: Long) {
         redisTemplate.expire(key, Duration.ofSeconds(seconds))
     }
 
