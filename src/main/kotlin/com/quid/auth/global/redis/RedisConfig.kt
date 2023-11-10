@@ -11,17 +11,17 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 @Configuration
 class RedisConfig {
 
-    @Value("\${spring.redis.host}")
+    @Value("\${spring.data.redis.host}")
     private lateinit var redisHost: String
 
-    @Value("\${spring.redis.port}")
+    @Value("\${spring.data.redis.port}")
     private var redisPort: Int = 0
 
 
     @Bean
     fun <VALUE> redisTemplate(): RedisTemplate<String, VALUE> =
         RedisTemplate<String, VALUE>().apply {
-            setConnectionFactory(redisConnectionFactory())
+            connectionFactory = redisConnectionFactory()
             keySerializer = StringRedisSerializer()
             valueSerializer = GenericJackson2JsonRedisSerializer()
         }

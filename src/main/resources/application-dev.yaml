@@ -4,10 +4,6 @@ spring:
     url: jdbc:mysql://localhost:3306/auth?characterEncoding=UTF-8&serverTimezone=UTC
     username: test
     password: testUser
-  redis:
-    host: redis.jaeung.dev
-    port: 6379
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,9 +11,13 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.MySQLDialect
         jdbc:
           lob:
             non_contextual_creation: true
+  data:
+    redis:
+      host: redis.jaeung.dev
+      port: 6379
 jwt:
   secret: this_is_token_secret_code_please_replace_this_in_production
