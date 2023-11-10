@@ -1,6 +1,6 @@
 package com.quid.auth.token.gateway.repository
 
-import com.quid.auth.global.redis.RedisRepository
+import com.quid.auth.global.redis.RedisBaseRepository
 import com.quid.auth.token.gateway.repository.model.UserTokenJti
 import org.springframework.stereotype.Repository
 
@@ -12,7 +12,7 @@ interface RefreshTokenRepository {
 
     @Repository
     class RedisRefreshTokenRepository(
-        private val redisTemplate: RedisRepository<String>
+        private val redisTemplate: RedisBaseRepository<String>
     ) : RefreshTokenRepository {
 
         override fun save(userToken: UserTokenJti) {

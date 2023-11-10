@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository
 import java.time.Duration
 
 @Repository
-class RedisRepository <VALUE> (
+class RedisBaseRepository<VALUE>(
     private val redisTemplate: RedisTemplate<String, VALUE>
 ) {
 

@@ -2,10 +2,10 @@ package com.quid.auth.user.gateway.repository.jpa
 
 import com.quid.auth.user.domain.AuthType
 import com.quid.auth.user.domain.UserAuthority
+import jakarta.persistence.*
+import jakarta.persistence.GenerationType.IDENTITY
 import org.hibernate.annotations.Where
 import java.time.LocalDateTime
-import javax.persistence.*
-import javax.persistence.GenerationType.IDENTITY
 
 @Entity
 @Table(name = "user_authority", indexes = [

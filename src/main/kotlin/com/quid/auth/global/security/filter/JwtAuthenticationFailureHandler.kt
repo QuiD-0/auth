@@ -2,14 +2,14 @@ package com.quid.auth.global.security.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.quid.auth.global.api.Error
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.stereotype.Component
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @Component
-class JwtAuthenticationFailureHandler: AccessDeniedHandler {
+class JwtAuthenticationFailureHandler : AccessDeniedHandler {
     override fun handle(
         request: HttpServletRequest?,
         response: HttpServletResponse?,
@@ -25,10 +25,13 @@ class JwtAuthenticationFailureHandler: AccessDeniedHandler {
         response?.apply {
             status = 403
             contentType = "application/json"
-            writer.write(ObjectMapper().writeValueAsString(
-                Error { accessDeniedException?.message ?: "Access Denied" }
-            ))
+            writer.write(errorResponse(accessDeniedException))
         }
     }
+
+    private fun errorResponse(accessDeniedException: AccessDeniedException?): String =
+        ObjectMapper().writeValueAsString(
+            Error { accessDeniedException?.message ?: "Access Denied" }
+        )
 
 }

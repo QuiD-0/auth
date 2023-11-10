@@ -1,12 +1,12 @@
 package com.quid.auth.user.gateway.repository.redis
 
-import com.quid.auth.global.redis.RedisRepository
+import com.quid.auth.global.redis.RedisBaseRepository
 import com.quid.auth.user.domain.UserAuthority
 import org.springframework.stereotype.Repository
 
 @Repository
 class UserAuthorityRedisRepository(
-    private val redisListRepository: RedisRepository<UserAuthorityRedisHash>
+    private val redisListRepository: RedisBaseRepository<UserAuthorityRedisHash>
 ) {
     operator fun get(userSeq: Long): List<UserAuthority>? =
         redisListRepository.getAll(makeKey(userSeq))

@@ -1,5 +1,8 @@
 package com.quid.auth.global.log
 
+import jakarta.servlet.FilterChain
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.core.Ordered
@@ -8,13 +11,10 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.util.ContentCachingRequestWrapper
 import org.springframework.web.util.ContentCachingResponseWrapper
-import javax.servlet.FilterChain
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-class LoggingFilter: OncePerRequestFilter() {
+class LoggingFilter : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
@@ -38,7 +38,7 @@ class LoggingFilter: OncePerRequestFilter() {
 
             cachingResponseWrapper.copyBodyToResponse()
         } catch (e: Exception) {
-            log.error( "LoggingFilter error : ${e.message}")
+            log.error("LoggingFilter error : ${e.message}")
         }
     }
 }

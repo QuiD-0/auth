@@ -1,9 +1,9 @@
 package com.quid.auth.user.gateway.repository.jpa
 
 import com.quid.auth.user.domain.User
+import jakarta.persistence.*
+import jakarta.persistence.GenerationType.IDENTITY
 import org.hibernate.annotations.Where
-import javax.persistence.*
-import javax.persistence.GenerationType.IDENTITY
 
 @Entity
 @Where(clause = "deleted = false")
