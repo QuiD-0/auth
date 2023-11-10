@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.7.17"
+	id("org.springframework.boot") version "3.1.5"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
@@ -20,11 +20,12 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("com.mysql:mysql-connector-j")
 	implementation("com.zaxxer:HikariCP")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.2")
@@ -32,7 +33,6 @@ dependencies {
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 }
 
 tasks.withType<KotlinCompile> {
