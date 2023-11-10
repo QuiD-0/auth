@@ -1,10 +1,12 @@
 package com.quid.auth.user.gateway.repository.jpa
 
 import com.quid.auth.user.domain.User
+import org.hibernate.annotations.Where
 import javax.persistence.*
 import javax.persistence.GenerationType.IDENTITY
 
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "user", indexes = [Index(name = "idx_username", columnList = "username", unique = true)])
 class UserEntity(
     @Id
