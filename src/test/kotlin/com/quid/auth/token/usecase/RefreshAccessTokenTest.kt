@@ -4,9 +4,11 @@ import com.quid.auth.token.domain.AccessToken
 import com.quid.auth.token.domain.Payload
 import com.quid.auth.token.domain.RefreshToken
 import com.quid.auth.token.domain.TokenType
+import com.quid.auth.token.fixture.FakeRedisRepository
 import com.quid.auth.token.gateway.repository.RefreshTokenRepository
 import com.quid.auth.token.gateway.repository.model.UserTokenJti
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -17,8 +19,7 @@ class RefreshAccessTokenTest{
     private val tokenSecret = "this_is_test_secret_key_for_token_encode_and_decode"
     private val tokenEncoder: TokenEncoder = TokenEncoder.JwtTokenEncoder(tokenSecret)
     private val tokenDecoder: TokenDecoder = TokenDecoder.JwtTokenDecoder(tokenSecret)
-    private val refreshTokenRepository: RefreshTokenRepository = RefreshTokenRepository.RedisRefreshTokenRepository()
-
+    private val refreshTokenRepository: RefreshTokenRepository = FakeRedisRepository()
     private val refreshAccessToken: RefreshAccessToken = RefreshAccessToken.RefreshAccessTokenImpl(
         tokenEncoder = tokenEncoder,
         tokenDecoder = tokenDecoder,
