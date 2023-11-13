@@ -11,10 +11,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
         jdbc:
           lob:
             non_contextual_creation: true
+    open-in-view: false
   data:
     redis:
       host: redis.jaeung.dev
