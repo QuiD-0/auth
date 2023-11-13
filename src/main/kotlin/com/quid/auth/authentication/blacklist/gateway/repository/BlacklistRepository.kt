@@ -1,11 +1,12 @@
 package com.quid.auth.authentication.blacklist.gateway.repository
 
+import com.quid.auth.authentication.blacklist.domain.Blacklist
 import com.quid.auth.authentication.blacklist.gateway.repository.jpa.BlacklistJpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 interface BlacklistRepository {
-    fun existsByUserSeq(userSeq: Long): Boolean
+    fun findByUserSeq(userSeq: Long): List<Blacklist>
 
     @Repository
     class BlacklistRepositoryImpl(
@@ -13,11 +14,10 @@ interface BlacklistRepository {
     ) : BlacklistRepository {
 
         @Transactional(readOnly = true)
-        override fun existsByUserSeq(userSeq: Long): Boolean =
-            jpaRepository.findByUserSeq(userSeq)
+        override fun findByUserSeq(userSeq: Long): List<Blacklist> {
+            return jpaRepository.findByUserSeq(userSeq)
                 .map { it.toDomain() }
-                .also { println(it) }
-                .any { it.isNotExpired() }
+        }
 
     }
 }

@@ -12,6 +12,6 @@ class BlacklistTest {
     @DisplayName("Blacklist expireDate")
     fun expireDateTest() {
         val blacklist = Blacklist(1, "정지", LocalDateTime.now().plusDays(1))
-        assertTrue(blacklist.isNotExpired())
+        assertTrue(blacklist.isActive())
     }
 }

@@ -29,6 +29,6 @@ data class UserDetail (
 
     override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean = true
+    override fun isEnabled(): Boolean = !blacklist.any { it.isActive() }
 
 }

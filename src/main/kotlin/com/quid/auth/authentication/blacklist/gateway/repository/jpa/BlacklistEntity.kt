@@ -1,16 +1,17 @@
 package com.quid.auth.authentication.blacklist.gateway.repository.jpa
 
 import com.quid.auth.authentication.blacklist.domain.Blacklist
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
+import jakarta.persistence.*
 import jakarta.persistence.GenerationType.IDENTITY
-import jakarta.persistence.Id
-import jakarta.persistence.Table
 import org.hibernate.annotations.Where
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "blacklist")
+@Table(
+    name = "blacklist", indexes = [
+        Index(name = "idx_blacklistentity_userseq", columnList = "userSeq")
+    ]
+)
 @Where(clause = "deleted = false")
 class BlacklistEntity(
     @Id
