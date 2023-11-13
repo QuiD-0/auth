@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/auth?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/auth?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: test
     password: testUser
   jpa:
@@ -19,5 +19,8 @@ spring:
     redis:
       host: redis.jaeung.dev
       port: 6379
+      repositories:
+        enabled: false
+
 jwt:
   secret: this_is_token_secret_code_please_replace_this_in_production
