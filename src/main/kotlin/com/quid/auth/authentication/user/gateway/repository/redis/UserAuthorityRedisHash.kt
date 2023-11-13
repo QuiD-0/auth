@@ -2,6 +2,7 @@ package com.quid.auth.authentication.user.gateway.repository.redis
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.quid.auth.authentication.user.domain.AuthType
 import com.quid.auth.authentication.user.domain.UserAuthority
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -12,7 +13,7 @@ data class UserAuthorityRedisHash @JsonCreator constructor(
     @JsonProperty("userSeq")
     val userSeq: Long,
     @JsonProperty("authorityName")
-    val authorityName: com.quid.auth.authentication.user.domain.AuthType,
+    val authorityName: AuthType,
     @JsonProperty("regDate")
     val regDate: Long,
     @JsonProperty("deleted")
