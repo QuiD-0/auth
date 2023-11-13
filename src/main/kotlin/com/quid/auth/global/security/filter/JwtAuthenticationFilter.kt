@@ -1,7 +1,7 @@
 package com.quid.auth.global.security.filter
 
 import com.quid.auth.token.usecase.TokenDecoder
-import com.quid.auth.user.usecase.UserAuthService
+import com.quid.auth.userInfo.user.usecase.UserAuthService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
