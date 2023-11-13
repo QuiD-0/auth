@@ -24,4 +24,7 @@ data class Blacklist(
     )
 
     fun delete() = copy(deleted = true)
+
+    fun isExpired(): Boolean = LocalDateTime.now().isAfter(expireDate)
+    fun isNotExpired(): Boolean = LocalDateTime.now().isBefore(expireDate)
 }
