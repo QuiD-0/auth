@@ -1,6 +1,7 @@
 package com.quid.auth.authentication.blacklist.gateway.repository
 
 import com.quid.auth.authentication.blacklist.domain.Blacklist
+import com.quid.auth.authentication.blacklist.gateway.repository.jpa.BlacklistEntity
 import com.quid.auth.authentication.blacklist.gateway.repository.jpa.BlacklistJpaRepository
 import com.quid.auth.authentication.blacklist.gateway.repository.redis.BlackListRedisRepository
 import org.springframework.stereotype.Repository
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 
 interface BlacklistRepository {
     fun findByUserSeq(userSeq: Long): List<Blacklist>
+    fun save(blacklist: Blacklist): Blacklist
 
     @Repository
     class BlacklistRepositoryImpl(
@@ -21,5 +23,8 @@ interface BlacklistRepository {
                 ?: jpaRepository.findByUserSeq(userSeq)
                     .map { it.toDomain() }
                     .also { cache[userSeq] = it }
+
+        override fun save(blacklist: Blacklist) =
+            jpaRepository.save(BlacklistEntity(blacklist)).toDomain()
     }
 }
