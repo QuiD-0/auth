@@ -26,7 +26,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("com.mysql:mysql-connector-j")
+	implementation("org.postgresql:postgresql")
 	implementation("com.zaxxer:HikariCP")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.2")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")

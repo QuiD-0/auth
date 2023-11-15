@@ -1,9 +1,8 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/auth?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    username: test
-    password: testUser
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db.jaeung.dev:5432/postgres
+    username: quid
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,6 +13,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
   data:
     redis:
